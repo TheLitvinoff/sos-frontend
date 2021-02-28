@@ -1,8 +1,8 @@
-import moment from "moment";
+import moment from 'moment';
 
 export const Configuration = {
   backend: {
-    host: '0.0.0.0', 
+    host: '192.168.0.255',
     port: '56733',
   },
   home: {
@@ -13,26 +13,26 @@ export const Configuration = {
       offset: 15,
       saved: {
         position_top: 5,
-        size: 25
-      }
-    }
+        size: 25,
+      },
+    },
   },
   map: {
     origin: {
       latitude: 37.78825,
-      longitude: -122.4324
+      longitude: -122.4324,
     },
     delta: {
       latitude: 0.0422,
-      longitude: 0.0221
-    }
+      longitude: 0.0221,
+    },
   },
-  timeFormat: postTime => {
-    time = "";
+  timeFormat: (postTime) => {
+    let time = '';
     if (postTime) {
       time = moment(postTime).fromNow();
     }
     // time = postTime.toUTCString();
     return time;
-  }
+  },
 };

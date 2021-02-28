@@ -9,7 +9,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import {
   createReactNavigationReduxMiddleware,
-  reduxifyNavigator
+  createReduxContainer
 } from "react-navigation-redux-helpers";
 import HomeScreen from "../screens/HomeScreen";
 import LoginScreen from "../screens/LoginScreen";
@@ -36,7 +36,7 @@ const noTransitionConfig = () => ({
 });
 
 const middleware = createReactNavigationReduxMiddleware(
-  "root",
+  // "root",
   state => state.nav
 );
 
@@ -308,7 +308,7 @@ const RootNavigator = createStackNavigator(
   }
 );
 
-const AppWithNavigationState = reduxifyNavigator(RootNavigator, "root");
+const AppWithNavigationState = createReduxContainer(RootNavigator, "root");
 
 const mapStateToProps = state => ({
   state: state.nav

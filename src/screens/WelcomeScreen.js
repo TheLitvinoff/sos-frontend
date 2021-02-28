@@ -2,7 +2,8 @@ import React from "react";
 import Button from "react-native-button";
 import { Text, View, StyleSheet } from "react-native";
 import { AppStyles } from "../AppStyles";
-import { AsyncStorage, ActivityIndicator } from "react-native";
+import { ActivityIndicator } from "react-native";
+import { AsyncStorage } from "@react-native-community/async-storage"
 
 class WelcomeScreen extends React.Component {
   static navigationOptions = {

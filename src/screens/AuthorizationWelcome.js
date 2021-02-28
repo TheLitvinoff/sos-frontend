@@ -55,7 +55,8 @@ class AuthorizationWelcomeScreen extends React.Component {
     }
     return (
       <View style={styles.container}>
-        <View style={styles.logoContainer}>
+        
+        {/* <View style={styles.logoContainer}>
             <Image
                 source={AppIcon.images.logo}
                 style={{
@@ -88,7 +89,7 @@ class AuthorizationWelcomeScreen extends React.Component {
                     }}
                 />
             </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     );
   }

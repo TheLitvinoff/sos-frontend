@@ -17,7 +17,6 @@ class ContactItem extends React.Component {
     }
 
     render() {
-        
         return (
             <View style={styles.contactItemTitle}> 
 
