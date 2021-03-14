@@ -8,7 +8,7 @@ const numColumns = 2;
 export const AppStyles = {
   color: {
     main: "#5ea23a",
-    text: "#696969",
+    text: "#442941",
     title: "#464646",
     subtitle: "#545454",
     lightgrey: "#e6e6e6",
@@ -38,8 +38,9 @@ export const AppStyles = {
     main: "80%"
   },
   fontName: {
-    main: "System",
-    bold: "System"
+    main: "Montserrat",
+    bold: "Montserrat-Bold",
+    light: "Montserrat-Light"
   },
   borderRadius: {
     main: 25,
@@ -63,6 +64,7 @@ export const AppIcon = {
     authorizationSingUp: require("../assets/icons/1.png"),
     authorizationSingIn: require("../assets/icons/2.png"),
     logo: require("../assets/icons/logo.png"),
+    logosvg: require("../assets/icons/logo.svg"),
 
     loginEmail: require("../assets/icons/loginEmail.png"),
     loginFinger: require("../assets/icons/loginFinger.png"),

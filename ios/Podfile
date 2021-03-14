@@ -70,6 +70,8 @@
 
 #   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
 
+pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
 #   target 'SenseOfSeeingTests' do
 #     inherit! :search_paths
 #     # Pods for testing
