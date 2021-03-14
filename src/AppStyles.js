@@ -20,7 +20,8 @@ export const AppStyles = {
     location: "#a9a9a9",
     white: "white",
     facebook: "#4267b2",
-    grey: "grey",
+    grey: "#cecece",
+    pink: "#C35399",
     greenBlue: "#00aea8",
     placeholder: "#a0a0a0",
     background: "#f2f2f2",
@@ -68,6 +69,7 @@ export const AppIcon = {
 
     loginEmail: require("../assets/icons/loginEmail.png"),
     loginFinger: require("../assets/icons/loginFinger.png"),
+    loginWave: require("../assets/icons/loginWave.png"),
     
     regisEmail: require("../assets/icons/regisEmail.png"),
     regisDots: require("../assets/icons/regisDots.png"),
