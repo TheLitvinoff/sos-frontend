@@ -17,6 +17,8 @@ import SignupScreen from "../screens/SignupScreen";
 import RegistrationScreen from "../screens/RegistrationScreen";
 import RegistrationProfileTypeScreen from "../screens/RegistrationProfileTypeScreen";
 import RegistrationFingerScreen from "../screens/RegistrationFingerScreen";
+import RegistrationPersonalInfoScreen from "../screens/RegistrationPersonalInfo";
+import RegistrationPhotoScreen from "../screens/RegistrationPhoto";
 import AuthorizationWelcome from "../screens/AuthorizationWelcome";
 import ContactsScreen from "../screens/ContactsScreen";
 import FeedScreen from "../screens/FeedScreen";
@@ -48,6 +50,8 @@ const LoginStack = createStackNavigator(
     Registration: { screen: RegistrationScreen },
     RegistrationFinger: { screen: RegistrationFingerScreen },
     RegistrationProfileType: { screen: RegistrationProfileTypeScreen },
+    RegistrationPersonalInfo: { screen: RegistrationPersonalInfoScreen },
+    RegistrationPhoto: { screen: RegistrationPhotoScreen },
     AuthorizationWelcome: { screen: AuthorizationWelcome }
   },
   {

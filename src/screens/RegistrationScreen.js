@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  
+
   breadcrumbsContainer: {
     flex: 55,
     justifyContent: "center",

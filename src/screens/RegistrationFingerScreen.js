@@ -35,7 +35,7 @@ class RegistrationFingerScreen extends React.Component {
     }
     const { navigation } = this.props;
     AsyncStorage.setItem("@loggedInUserID:password", password);
-    this.props.navigation.navigate("RegistrationProfileType");
+    this.props.navigation.navigate("RegistrationPersonalInfo");
 
     // .catch(error => {
     //   const { code, message } = error;
@@ -49,7 +49,6 @@ class RegistrationFingerScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
 
         <View style={styles.titleContainer}>
           <View style={styles.titleTextContainer}>
@@ -123,62 +122,6 @@ class RegistrationFingerScreen extends React.Component {
             <DotsIcon />
           </View>
         </View>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {/*       <View style={styles.logoContainer}>
-            <Image
-                source={AppIcon.images.logo}
-                style={{
-                    width: 90,
-                    resizeMode: 'contain',
-                }}
-            />
-        </View>
-        <View style={styles.loginContainer}>
-                <View style={styles.InputContainer}>
-                  <TextInput
-                    style={styles.body}
-                    secureTextEntry={true}
-                    placeholder=""
-                    onChangeText={text => this.setState({ password: text })}
-                    value={this.state.password}
-                    placeholderTextColor={AppStyles.color.grey}
-                    underlineColorAndroid="transparent"
-                  />
-                </View>
-                <TouchableOpacity
-                onPress={() => this.onPressSendPass()}
-                >
-                  <Image
-                      source={AppIcon.images.regisFinger}
-                      style={{
-                          width: 90,
-                          marginTop: 10,
-                          resizeMode: 'contain',
-                      }}
-                  />
-                </TouchableOpacity>
-        </View>
-        <Image
-            source={AppIcon.images.regisDotsFinger}
-            style={{
-                flex: 2,
-                width: 90,
-                resizeMode: 'contain',
-            }}
-        /> */}
       </View>
     );
   }
@@ -290,12 +233,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     color: AppStyles.color.text,
   },
-
-
-
-
-
-
 
 });
 
