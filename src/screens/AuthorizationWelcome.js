@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		justifyContent: "center",
 		alignItems: "center",
+		backgroundColor: 'white',
 	},
 	logoContainer: {
 		flex: 50,
@@ -175,6 +176,24 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		width: '100%',
 		height: '25%'
+	},
+	signUp: {
+		shadowColor: "#000000",
+		shadowOpacity: 0.25,
+		shadowRadius: 5,
+		shadowOffset: {
+		  height: 1,
+		  width: 1
+		},
+	},
+	signIn: {
+		shadowColor: "#000000",
+		shadowOpacity: 0.25,
+		shadowRadius: 5,
+		shadowOffset: {
+		  height: 1,
+		  width: 1
+		},
 	}
 
 });

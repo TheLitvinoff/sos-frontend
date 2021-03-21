@@ -155,8 +155,6 @@ class LoginScreen extends React.Component {
                     <Text style={styles.forgotPwdText}>Forgotten Password?</Text>
                 </TouchableOpacity>
               </View>
-
-
             </View>
 
 

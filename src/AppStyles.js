@@ -21,6 +21,7 @@ export const AppStyles = {
     white: "white",
     facebook: "#4267b2",
     grey: "#cecece",
+    greyfill: "#f1f1f1",
     pink: "#C35399",
     greenBlue: "#00aea8",
     placeholder: "#a0a0a0",
