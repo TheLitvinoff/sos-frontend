@@ -82,7 +82,7 @@ class AuthorizationWelcomeScreen extends React.Component {
 							onPress={() => { this.props.navigation.navigate("Login"); }}
 							style={styles.signIn}>
 							<SignInIcon
-								
+
 							/>
 						</TouchableOpacity>
 					</View>
@@ -93,7 +93,7 @@ class AuthorizationWelcomeScreen extends React.Component {
 							onPress={() => { this.props.navigation.navigate("Registration"); }}
 							style={styles.signUp}>
 							<SignUpIcon
-								
+
 							/>
 						</TouchableOpacity>
 					</View>
@@ -182,8 +182,8 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.25,
 		shadowRadius: 5,
 		shadowOffset: {
-		  height: 1,
-		  width: 1
+			height: 1,
+			width: 1
 		},
 	},
 	signIn: {
@@ -191,8 +191,8 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.25,
 		shadowRadius: 5,
 		shadowOffset: {
-		  height: 1,
-		  width: 1
+			height: 1,
+			width: 1
 		},
 	}
 

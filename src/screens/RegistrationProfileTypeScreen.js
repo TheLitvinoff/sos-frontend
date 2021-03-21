@@ -28,9 +28,10 @@ class RegistrationProfileType extends React.Component {
     const { type } = this.state;
     const { navigation } = this.props;
     let user = {
-      email: null,
+      email: "test user",
       password: null
     }
+    this.props.navigation.dispatch({ type: "Login", user: { email: user.email } });
     AsyncStorage.getItem("@loggedInUserID:email")
       .then((email) => {
         user.email = email

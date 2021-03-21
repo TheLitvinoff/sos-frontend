@@ -17,44 +17,34 @@ import {
 } from "../AppStyles";
 import { Configuration } from "../Configuration";
 
+
+import LogoIcon from "../../assets/icons/mainLogo.svg";
+import Stories from "../../assets/icons/mainStories.svg";
+
+
 class FeedScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerStyle: {
-      backgroundColor: AppStyles.color.tint,
+      
     },
     headerTitle: () => {
       return(
         <SafeAreaView>
           
-          <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
-        <Image
-          source={AppIcon.images.logo}
-          style={{
-              width: 70,
-              marginBottom: 10,
-              resizeMode: 'contain',
-          }}
-        />
-      </SafeAreaView>
+          <LogoIcon />
+        </SafeAreaView>
       )
     },
-    headerRight: () => {
-      return(
-        <TouchableOpacity
-          onPress={() => this.onPressSendEmail()}
-        >
-           <Image
-              source={AppIcon.images.logo}
-              style={{
-                  width: 70,
-                  marginBottom: 10,
-                  resizeMode: 'contain',
-              }}
-          />
-  
-        </TouchableOpacity>
+    headerLeft: () => {
+      return (
+        <SafeAreaView>
+          
+          <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+
+        </SafeAreaView>
       );
     }
+
   });
 
   constructor(props) {
@@ -73,7 +63,9 @@ class FeedScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Text style={styles.title}>Feed Screen {this.props.user.email}</Text>
+        <Stories />
+
+
       </ScrollView>
     );
   }
