@@ -38,6 +38,17 @@ function nav(state = initialNavState, action) {
         console.log(e);
       }
       break;
+    case "Settings":
+      try {
+        nextState = RootNavigator.router.getStateForAction(
+          NavigationActions.navigate({ routeName: "SettingsStack" }),
+          state
+        );
+      } catch (e) {
+        console.log(e);
+      }
+      break;
+
     default:
       nextState = RootNavigator.router.getStateForAction(action, state);
       break;
@@ -52,6 +63,8 @@ const initialAuthState = { isLoggedIn: false };
 function auth(state = initialAuthState, action) {
   switch (action.type) {
     case "Login":
+      return { ...state, isLoggedIn: true, user: action.user };
+    case "Settings":
       return { ...state, isLoggedIn: true, user: action.user };
     case "Messages":
       return { ...state, isLoggedIn: true, user: action.user, opponent: action.opponent };

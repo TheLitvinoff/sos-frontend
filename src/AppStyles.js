@@ -115,8 +115,14 @@ export const AppIcon = {
     contactsPlusHead: require("../assets/icons/contactsPlusHead.png"),  
     contactsSearch: require("../assets/icons/contactsSearch.png"),  
 
+    postOptions: require("../assets/icons/postOptions.png"),
+
     home: require("../assets/icons/home.png"),
     defaultUser: require("../assets/icons/default_user.jpg"),
+    slavaUser: require("../assets/icons/picSlava.png"),
+    andrewUser: require("../assets/icons/picAndrew.png"),
+    zalinaUser: require("../assets/icons/picZalina.png"),
+    defaultPost: require("../assets/icons/postDefault.png"),
     logout: require("../assets/icons/shutdown.png")
   }
 };

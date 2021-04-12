@@ -6,7 +6,7 @@ export const Configuration = {
     port: '56733',
   },
   home: {
-    tab_bar_height: 50,
+    tab_bar_height: 70,
     initial_show_count: 4,
     listing_item: {
       height: 130,

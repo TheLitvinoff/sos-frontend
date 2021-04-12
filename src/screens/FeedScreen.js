@@ -15,12 +15,12 @@ import {
   AppIcon,
   AppStyles,
 } from "../AppStyles";
-import { Configuration } from "../Configuration";
 
 
 import LogoIcon from "../../assets/icons/mainLogo.svg";
 import Stories from "../../assets/icons/mainStories.svg";
-
+import StoriesContainer from "./MainPage/Stories";
+import PostsContainer from "./MainPage/Posts";
 
 class FeedScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -39,7 +39,7 @@ class FeedScreen extends React.Component {
       return (
         <SafeAreaView>
           
-          <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+          <StatusBar barStyle="dark-content"/>
 
         </SafeAreaView>
       );
@@ -62,10 +62,26 @@ class FeedScreen extends React.Component {
 
   render() {
     return (
+      testUsers = [
+        { "username": "Your Story", "profilePicURL": AppIcon.images.slavaUser },
+        { "username": "Andrew Poletaev", "profilePicURL": AppIcon.images.andrewUser },
+        { "username": "Zalina", "profilePicURL": AppIcon.images.zalinaUser },
+        { "username": "User 3", "profilePicURL": AppIcon.images.defaultUser },
+        { "username": "User 2", "profilePicURL": AppIcon.images.defaultUser },
+        { "username": "User Shmuser", "profilePicURL": AppIcon.images.defaultUser },
+        { "username": "Test User", "profilePicURL": AppIcon.images.defaultUser },
+        { "username": "LLL", "profilePicURL": AppIcon.images.defaultUser },
+      ],
+
+      testPosts = [
+        { "username": "Zalina", "picURL": AppIcon.images.defaultPost, "profilePicURL": AppIcon.images.zalinaUser, "viewCount": 25 },
+        { "username": "Andrew Poletaev", "picURL": AppIcon.images.andrewUser, "profilePicURL": AppIcon.images.andrewUser, "viewCount": 17 },
+      ],
+
       <ScrollView style={styles.container}>
-        <Stories />
+        <StoriesContainer users={testUsers} />
 
-
+        <PostsContainer posts={testPosts} />
       </ScrollView>
     );
   }
@@ -75,7 +91,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     flex: 1,
-    padding: Configuration.home.listing_item.offset
   },
   title: {
     fontFamily: AppStyles.fontName.bold,

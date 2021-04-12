@@ -4,10 +4,11 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  StatusBar, 
+  StatusBar,
   SafeAreaView,
-  Image, 
-  View
+  Image,
+  View,
+  FlatList
 } from "react-native";
 
 import FastImage from "react-native-fast-image";
@@ -18,35 +19,28 @@ import {
 } from "../AppStyles";
 import { Configuration } from "../Configuration";
 
+import PostPreviewItem from "./ProfilePage/PostsPreview";
+
+import SettingsIcon from "../../assets/icons/profileSettings.svg";
+import EditIcon from "../../assets/icons/profileEdit.svg";
+import ContactsIcon from "../../assets/icons/profileContacts.svg";
+import TabPostsActive from "../../assets/icons/profileTabPostsActive.svg";
+import TabPostsInactive from "../../assets/icons/profileTabPostsInactive.svg";
+import TabFavActive from "../../assets/icons/profileTabFavActive.svg";
+import TabFavInactive from "../../assets/icons/profileTabFavInactive.svg";
+
 class HomeScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => ({
     headerStyle: {
-      backgroundColor: AppStyles.color.tint,
+
     },
     headerTitle: () => {
-      return(
-        <Image
-          source={AppIcon.images.logo}
-          style={{
-              width: 70,
-              marginBottom: 10,
-              resizeMode: 'contain',
-          }}
-        />
-      )
     },
     headerLeft: () => {
       return (
         <SafeAreaView>
-          
-        <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("Registration")}
-            style = {{ flex: 3, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}
-          ><Image source={AppIcon.images.topbarMessages} style={styles.messagesButton}/>
-        </TouchableOpacity>
-          <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
-
+          <StatusBar barStyle="dark-content" />
         </SafeAreaView>
       );
     }
@@ -64,7 +58,11 @@ class HomeScreen extends React.Component {
       menuIcon: this.props.user.profileURL
     });
   }
-  
+
+
+  onPressedSettings = () => {
+    this.props.navigation.dispatch({ type: "Settings", user: this.props.user });
+  }
 
   editProfile = () => {
 
@@ -73,129 +71,83 @@ class HomeScreen extends React.Component {
   render() {
     let firstName = this.props.user.first_name || "Firstname"
     let surName = this.props.user.second_name || "Surname"
+    let username = this.props.user.username || "username"
     let visibilityPhoto = !this.props.user.visible ? AppIcon.images.homepageVisibilityOff : AppIcon.images.homepageVisibilityOn
     let marriage = this.props.user.marriage_status || "Marriage Status"
     let location = this.props.user.location || "Location"
+    let picURL = this.props.user.picURL || AppIcon.images.defaultUser
+    let posts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.profileNameContainer}>
-          <Text style={styles.title}>{firstName} {surName}</Text>
-          <Image source={visibilityPhoto} style={styles.visibiliyIcon} />
-          <View style={styles.profileEditContainer}>
-            <TouchableOpacity
-              onPress={() => this.editProfile()}
-            >
-              <Image source={AppIcon.images.homepageEdit} style={styles.editIcon}/>
-            </TouchableOpacity>
-          </View>
-        </View>
 
-        <View style={styles.profileStatusContainer}>
-            <TouchableOpacity
-              onPress={() => this.editProfile()}
-              style = {{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}
-            ><Image source={AppIcon.images.homepageUserPhotoDefault} style={styles.userPhoto}/>
-            </TouchableOpacity>
-            <View style={styles.profileStatusInfoContainer}>
-              <View style={styles.profileStatusInfoMarriageContainer}>
-                <Image source={AppIcon.images.homepageMarriage} style={styles.marriageIcon}/>
-                <Text >{marriage}</Text>
-              </View>
-              <View style={styles.profileStatusInfoLocationContainer}>
-                <Image source={AppIcon.images.homepageLocation} style={styles.marriageIcon}/>
-                <Text >{location}</Text>
-              </View>
+        <View style={styles.settingsContainer}>
+          <TouchableOpacity onPress={this.onPressedSettings}>
+            <View style={styles.settingsButtonContainer}>
+              <SettingsIcon />
             </View>
-        </View>
-
-        <View style={styles.tabContainer}>
-          <TouchableOpacity
-              onPress={() => this.editProfile()}
-              style = {{ flex: 3, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderRightWidth: 1, borderColor: AppStyles.color.lightgrey}}
-            ><Image source={AppIcon.images.homepagePlayActive} style={styles.tabButton}/>
-          </TouchableOpacity>
-          <TouchableOpacity
-              onPress={() => this.editProfile()}
-              style = {{ flex: 3, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderRightWidth: 1, borderColor: AppStyles.color.lightgrey}}
-            ><Image source={AppIcon.images.homepagePlusInactive} style={styles.tabButton}/>
-          </TouchableOpacity>
-          <TouchableOpacity
-              onPress={() => this.editProfile()}
-              style = {{ flex: 3, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}
-            ><Image source={AppIcon.images.homepageHeartInactive} style={styles.tabButton}/>
           </TouchableOpacity>
         </View>
 
-        <View style={styles.profileFeedContainer}>
-          <View style={styles.profileFeedItem}>
-            <View style={styles.profileFeedItemTitle}>
-              <TouchableOpacity
-                  onPress={() => this.editProfile()}
-                  style = {{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginVertical: 10}}
-                >
-                  <Image source={AppIcon.images.defaultUser} style={styles.profileFeedItemUserPhoto}/>
-                  <Text style={styles.profileFeedItemName}>Firstname Surname</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.profileFeedItemObject}>
-
-            </View>
-
-          </View>
-
-          <View style={styles.profileFeedItem}>
-            <View style={styles.profileFeedItemTitle}>
-              <TouchableOpacity
-                  onPress={() => this.editProfile()}
-                  style = {{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginVertical: 10}}
-                >
-                  <Image source={AppIcon.images.defaultUser} style={styles.profileFeedItemUserPhoto}/>
-                  <Text style={styles.profileFeedItemName}>Firstname Surname</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.profileFeedItemObject}>
-
-            </View>
-
-          </View>
-
-          <View style={styles.profileFeedItem}>
-            <View style={styles.profileFeedItemTitle}>
-              <TouchableOpacity
-                  onPress={() => this.editProfile()}
-                  style = {{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginVertical: 10}}
-                >
-                  <Image source={AppIcon.images.defaultUser} style={styles.profileFeedItemUserPhoto}/>
-                  <Text style={styles.profileFeedItemName}>Firstname Surname</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.profileFeedItemObject}>
-
-            </View>
-
-          </View>
-
-          <View style={styles.profileFeedItem}>
-            <View style={styles.profileFeedItemTitle}>
-              <TouchableOpacity
-                  onPress={() => this.editProfile()}
-                  style = {{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginVertical: 10}}
-                >
-                  <Image source={AppIcon.images.defaultUser} style={styles.profileFeedItemUserPhoto}/>
-                  <Text style={styles.profileFeedItemName}>Firstname Surname</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.profileFeedItemObject}>
-
-            </View>
-
+        <View style={styles.picContainer}>
+          <View style={styles.picUserContainer}>
+            <Image source={picURL} style={styles.picUser} />
           </View>
         </View>
+
+        <View style={styles.nameContainer}>
+          <Text style={styles.nameText}>{firstName} {surName}</Text>
+        </View>
+
+        <View style={styles.usernameContainer}>
+          <Text style={styles.usernameText}>@{username}</Text>
+        </View>
+
+
+        <View style={styles.actionButtonsContainer}>
+          <View style={styles.actionButtonEditContainer}>
+            <View style={styles.actionButtonEditIconContainer}>
+              <TouchableOpacity>
+                <EditIcon />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.actionButtonContactsContainer}>
+            <View style={styles.actionButtonContactsIconContainer}>
+              <TouchableOpacity>
+                <ContactsIcon />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.tabsButtonsContainer}>
+          <View style={styles.tabsButtonPostsContainer}>
+            <View style={styles.tabsButtonPostsIconContainer}>
+              <TouchableOpacity>
+                <TabPostsActive />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.tabsButtonFavContainer}>
+            <View style={styles.tabsButtonFavIconContainer}>
+              <TouchableOpacity>
+                <TabFavInactive />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.tabsContentsContainer}>
+          <FlatList
+            data={posts}
+            numColumns={3}
+            renderItem={({ item }) => (
+              <PostPreviewItem />
+            )}
+          />
+        </View>
+
       </ScrollView>
     );
   }
@@ -206,107 +158,105 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
     flexDirection: "column",
-    padding: Configuration.home.listing_item.offset
   },
-  profileNameContainer: {
+  settingsContainer: {
+    marginTop: 30,
+    height: 48,
     flexDirection: "row",
-    marginBottom: 0
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
-  profileStatusContainer: {
-    marginTop: 20,
-    marginLeft: 0,
-    flexDirection: "row", 
-    justifyContent: "flex-start", 
-    alignItems: "flex-start"
+  picContainer: {
+    height: 157,
+    justifyContent: "center",
+    alignItems: "center"
   },
-  profileStatusInfoContainer: {
-    flex: 3,
-    marginTop: 10,
-    flexDirection: "column",
-    justifyContent: "space-around"
+  nameContainer: {
+    height: 48,
+    justifyContent: "center",
+    alignItems: "center"
   },
-  profileStatusInfoMarriageContainer: {
-    flex: 1, 
+  usernameContainer: {
+    height: 30,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  actionButtonsContainer: {
+    height: 100,
     flexDirection: "row"
   },
-  profileStatusInfoLocationContainer: {
-    flex: 1,
-    flexDirection: "row"
-  },
-  profileFeedContainer: {
-    flexDirection: "column"
-  },
-  profileFeedItem: {
-    marginTop: 10,
-    marginBottom: 20,
-    flexDirection: "column"
-  },
-  profileFeedItemTitle: {
-    flex: 1,
-    flexDirection: "row"
-  }, 
-  profileFeedItemUserPhoto: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    marginLeft: 5
-  },
-  profileFeedItemName: {
-    marginLeft: 10,
-    fontFamily: AppStyles.fontName.bold,
-    fontWeight: "bold",
-    color: AppStyles.color.title,
-    fontSize: 14
-  },
-  profileFeedItemObject: {
-    height: 300,
-    backgroundColor: AppStyles.color.lightgrey
-  },
-  profileEditContainer: {
+  tabsButtonsContainer: {
+    height: 43,
     flexDirection: "row",
-    justifyContent: "flex-end"
+
+    justifyContent: "center",
+    alignItems: "center"
+
   },
-  editIcon: {
-    height: 30,
-    resizeMode: 'contain',
+  tabsContentsContainer: {
+    flex: 1,
   },
-  title: {
+
+  settingsButtonContainer: {
+    marginRight: 30
+  },
+
+  picUserContainer: {
+    height: "100%",
+    width: 157,
+  },
+
+  picUser: {
+    borderRadius: 15,
+    borderColor: AppStyles.color.pink,
+    height: "100%",
+    width: "100%",
+    resizeMode: "cover",
+  },
+
+  nameText: {
     fontFamily: AppStyles.fontName.bold,
-    fontWeight: "bold",
     color: AppStyles.color.title,
-    fontSize: 22
+    fontSize: 18
   },
-  visibiliyIcon: {
-    height: 30,
-    marginLeft: 3,
-    resizeMode: 'contain',
+
+  usernameText: {
+    fontFamily: AppStyles.fontName.main,
+    color: AppStyles.color.title,
+    fontSize: 12
   },
-  userPhoto: {
-    height: 90,
-    resizeMode: 'contain',
+
+  actionButtonEditContainer: {
+    flex: 1,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "flex-end",
+    marginRight: 20
   },
-  marriageIcon: {
-    height: 20,
-    resizeMode: 'contain',
-  }, 
-  tabContainer: {
+  actionButtonContactsContainer: {
+    flex: 1,
+    height: "100%",
+    justifyContent: "center",
+  },
+
+  tabsButtonPostsContainer: {
     borderWidth: 1,
-    borderLeftWidth: 0, 
-    borderRightWidth: 0, 
+    flex: 1,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
     borderColor: AppStyles.color.lightgrey,
-    marginTop: 20,
-    flexDirection: "row",
-  }, 
-  tabButton: {
-    height: 20,
-    marginVertical: 10,
-    resizeMode: 'contain',
-  }, 
-  messagesButton: {
-    height: 30,
-    marginVertical: 10,
-    resizeMode: 'contain',
-  }
+    borderBottomColor: "black"
+  },
+
+  tabsButtonFavContainer: {
+    borderWidth: 1,
+    flex: 1,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: AppStyles.color.lightgrey
+  },
 });
 
 const mapStateToProps = state => ({

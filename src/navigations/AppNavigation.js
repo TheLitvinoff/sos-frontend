@@ -29,6 +29,26 @@ import { AppIcon, AppStyles } from "../AppStyles";
 import { Configuration } from "../Configuration";
 import DrawerContainer from "../components/DrawerContainer";
 
+import MainSettingsScreen from "../screens/Settings/MainSettingsScreen";
+import SettingsAccount from "../screens/Settings/Account";
+import SettingsSecurity from "../screens/Settings/Security";
+import SettingsEmail from "../screens/Settings/Email";
+import SettingsPassword from "../screens/Settings/Password";
+import SettingsNotifications from "../screens/Settings/Notifications";
+
+import TabbarFeedActive from "../../assets/icons/tabbarFeedActive.svg";
+import TabbarFeedInactive from "../../assets/icons/tabbarFeedInactive.svg";
+import TabbarGlobalActive from "../../assets/icons/tabbarGlobalActive.svg";
+import TabbarGlobalInactive from "../../assets/icons/tabbarGlobalInactive.svg";
+import TabbarProfileActive from "../../assets/icons/tabbarProfileActive.svg";
+import TabbarProfileInactive from "../../assets/icons/tabbarProfileInactive.svg";
+import TabbarMessagesActive from "../../assets/icons/tabbarMessagesActive.svg";
+import TabbarMessagesInactive from "../../assets/icons/tabbarMessagesInactive.svg";
+import TabbarNewVideo from "../../assets/icons/tabbarNewVideo.svg";
+
+
+import { View } from "react-native";
+
 const noTransitionConfig = () => ({
   transitionSpec: {
     duration: 0,
@@ -65,7 +85,6 @@ const LoginStack = createStackNavigator(
   }
 );
 
-// messages stack
 const MessagesStack = createStackNavigator(
   {
     Messages: { screen: MessagesScreen },
@@ -81,14 +100,35 @@ const MessagesStack = createStackNavigator(
   }
 );
 
+
+const SettingsStack = createStackNavigator(
+  {
+    MainSettings: { screen: MainSettingsScreen },
+    SettingsAccount: { screen: SettingsAccount },
+    SettingsSecurity: { screen: SettingsSecurity },
+    SettingsEmail: { screen: SettingsEmail },
+    SettingsPassword: { screen: SettingsPassword },
+    SettingsNotifications: { screen: SettingsNotifications },
+  },
+  {
+    initialRouteName: "MainSettings",
+    headerMode: "float",
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: "red",
+      headerTitleStyle: styles.headerTitleStyle
+    }),
+    cardStyle: { backgroundColor: "#FFFFFF" }
+  }
+);
+
+
 const HomeStack = createStackNavigator(
   {
-    Home: { screen: HomeScreen }
+    Home: { screen: HomeScreen },
   },
   {
     initialRouteName: "Home",
-    headerMode: "float",
-
+    headerMode: "none",
     headerLayoutPreset: "center",
     navigationOptions: ({ navigation }) => ({
       headerTintColor: "red",
@@ -105,7 +145,6 @@ const ContactsStack = createStackNavigator(
   {
     initialRouteName: "Contacts",
     headerMode: "float",
-
     headerLayoutPreset: "center",
     navigationOptions: ({ navigation }) => ({
       headerTintColor: "red",
@@ -139,7 +178,7 @@ const GlobalStack = createStackNavigator(
   },
   {
     initialRouteName: "Global",
-    headerMode: "float",
+    headerMode: "none",
 
     headerLayoutPreset: "center",
     navigationOptions: ({ navigation }) => ({
@@ -157,7 +196,6 @@ const FeedbackStack = createStackNavigator(
   {
     initialRouteName: "Feedback",
     headerMode: "float",
-
     headerLayoutPreset: "center",
     navigationOptions: ({ navigation }) => ({
       headerTintColor: "red",
@@ -169,110 +207,80 @@ const FeedbackStack = createStackNavigator(
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Home: { screen: HomeStack, 
+    Home: {
+      screen: HomeStack,
       navigationOptions: {
-        tabBarIcon: ({focused, tintColor}) =>
-            <Image
-            style={{
-              width: 35,
-              marginTop: 20,
-              marginRight: 1,
-              resizeMode: 'contain'
-            }}
-            source={focused ? AppIcon.images.tabbarProfileActive : AppIcon.images.tabbarProfileInactive}
-          />
-      } 
+        tabBarIcon: ({ focused, tintColor }) =>
+          <View style={styles.smallTabbarIconContainer}>
+            {(() => {
+              if (focused) {
+                return <TabbarProfileActive />
+              }
+              return <TabbarProfileInactive />
+            })()}
+          </View>
+      }
     },
-    Contacts: { screen: ContactsStack,
+    Messages: {
+      screen: ContactsStack,
       navigationOptions: {
-        tabBarIcon: ({focused, tintColor}) =>
-            <Image
-            style={{
-              width: 35,
-              marginTop: 20,
-              resizeMode: 'contain'
-            }}
-            source={focused ? AppIcon.images.tabbarContactsActive : AppIcon.images.tabbarContactsInactive}
-          />
-      } 
-    }, 
-    Feed: { screen: FeedStack,
-      navigationOptions: {
-        tabBarIcon: ({focused, tintColor}) =>
-            <Image
-            style={{
-              width: 35,
-              marginTop: 20,
-              resizeMode: 'contain'
-            }}
-            source={focused ? AppIcon.images.tabbarFeedActive : AppIcon.images.tabbarFeedInactive}
-          />
-      } 
+        tabBarIcon: ({ focused, tintColor }) =>
+          <View style={styles.smallTabbarIconContainer}>
+            {(() => {
+              if (focused) {
+                return <TabbarMessagesActive />
+              }
+              return <TabbarMessagesInactive />
+            })()}
+          </View>
+      }
     },
-    Global: { screen: GlobalStack,
+    Feed: {
+      screen: FeedStack,
       navigationOptions: {
-        tabBarIcon: ({focused, tintColor}) =>
-            <Image
-            style={{
-              width: 35,
-              marginTop: 20,
-              resizeMode: 'contain'
-            }}
-            source={focused ? AppIcon.images.tabbarGlobalActive : AppIcon.images.tabbarGlobalInactive}
-          />
-      } 
+        tabBarIcon: ({ focused, tintColor }) =>
+          <View style={styles.smallTabbarIconContainer}>
+            {(() => {
+              if (focused) {
+                return <TabbarFeedActive />
+              }
+              return <TabbarFeedInactive />
+            })()}
+          </View>
+      }
     },
-    Feedback: { screen: FeedbackStack,
+    Global: {
+      screen: GlobalStack,
       navigationOptions: {
-        tabBarIcon: ({focused, tintColor}) =>
-            <Image
-            style={{
-              width: 35,
-              marginTop: 20,
-              resizeMode: 'contain'
-            }}
-            source={focused ? AppIcon.images.tabbarFeedbackActive : AppIcon.images.tabbarFeedbackInactive}
-          />
-      } 
+        tabBarIcon: ({ focused, tintColor }) =>
+          <View style={styles.smallTabbarIconContainer}>
+            {(() => {
+              if (focused) {
+                return <TabbarGlobalActive width="25"/>
+              }
+              return <TabbarGlobalInactive width="25"/>
+            })()}
+          </View>
+      }
+    },
+    NewVideo: {
+      screen: FeedbackStack,
+      navigationOptions: {
+        tabBarIcon: ({ focused, tintColor }) =>
+          <View style={styles.hugeTabbarIconContainer}>
+            <TabbarNewVideo />
+          </View>
+      }
     }
   },
   {
-    order: ["Feed", "Global", "Home", "Feedback", "Contacts"],
+    order: ["Feed", "Global", "NewVideo", "Messages", "Home"],
     navigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, tintColor }) => {
-        const { routeName } = navigation.state;
-        let iconName;
-        if (routeName === "Home") {
-          iconName = AppIcon.images.tabbarProfileActive;
-        } 
-        else if ( routeName === "Contacts" ) {
-          iconName = AppIcon.images.tabbarContactsActive;
-        } 
-        else if ( routeName === "Feed" ) {
-          iconName = AppIcon.images.tabbarFeedActive;
-        }
-        else if ( routeName === "Feedback" ) {
-          iconName = AppIcon.images.tabbarFeedActive;
-        }
-        else if ( routeName === "Global" ) {
-          iconName = AppIcon.images.tabbarFeedActive;
-        }
-
-        return (
-          <Image
-            style={{
-              width: 100,
-              resizeMode: 'contain'
-            }}
-            source={AppIcon.images.tabbarProfileActive}
-          />
-        );
-      }
     }),
     tabBarOptions: {
       activeTintColor: AppStyles.color.tint,
       inactiveTintColor: "gray",
-      showIcon: true, 
+      showIcon: true,
       showLabel: false,
       style: {
         height: Configuration.home.tab_bar_height
@@ -299,7 +307,8 @@ const RootNavigator = createStackNavigator(
   {
     LoginStack: { screen: LoginStack },
     DrawerStack: { screen: DrawerStack },
-    MessagesStack: { screen: MessagesStack }
+    MessagesStack: { screen: MessagesStack },
+    SettingsStack: { screen: SettingsStack }
   },
   {
     // Default config for all screens
@@ -328,7 +337,17 @@ const styles = StyleSheet.create({
     color: "black",
     flex: 1,
     fontFamily: AppStyles.fontName.main
-  }
+  },
+  smallTabbarIconContainer: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  hugeTabbarIconContainer: {
+    flex: 2,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
 });
 
 export { RootNavigator, AppNavigator, middleware };

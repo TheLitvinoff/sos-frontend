@@ -26,13 +26,16 @@ class LoginScreen extends React.Component {
 
   onPressLogin = () => {
     const { email, password } = this.state;
-    if (email.length <= 0 || password.length <= 0) {
+/*     if (email.length <= 0 || password.length <= 0) {
       alert("Please fill out the required fields.");
       return;
-    }
+    } */
     const { navigation } = this.props;
     AsyncStorage.setItem("@loggedInUserID:email", email);
     AsyncStorage.setItem("@loggedInUserID:password", password);
+
+    this.props.navigation.navigate("AuthorizationWelcome");
+    navigation.dispatch({ type: "Login", user: { email: email } });
 
     fetch('http://' + Configuration.backend.host + ":" + Configuration.backend.port + "/login", {
       method: 'POST',
