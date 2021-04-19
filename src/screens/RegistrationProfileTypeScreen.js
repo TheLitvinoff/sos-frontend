@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from 'react';
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity } from "react-native";
 import Button from "react-native-button";
 import { AppStyles, AppIcon } from "../AppStyles";
@@ -11,6 +11,8 @@ import DotsIcon from "../../assets/icons/regisProfileTypeDots.svg";
 import PersonalIcon from "../../assets/icons/regisProfileTypeWhite.svg";
 import BusinessIcon from "../../assets/icons/regisProfileTypeBusiness.svg";
 
+import ModalSubscribe from "./Registration/ModalSubscribeScreen";
+
 class RegistrationProfileType extends React.Component {
   static navigationOptions = {
     header: null
@@ -20,8 +22,16 @@ class RegistrationProfileType extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      type: ""
+      isModalVisible: false,
+      type: "",
     };
+  }
+
+  toggleModal = () => {
+    this.setState({
+      ...this.state,
+      isModalVisible: !this.state.isModalVisible
+    })
   }
 
   setType = () => {
@@ -106,7 +116,7 @@ class RegistrationProfileType extends React.Component {
             <View style={styles.typesContainerSelectionBusiness}>
               <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                  onPress={() => { }}>
+                  onPress={this.toggleModal}>
                   <View style={styles.buttonBusiness}>
                     <BusinessIcon />
                   </View>
@@ -148,74 +158,7 @@ class RegistrationProfileType extends React.Component {
           </View>
         </View>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {/*         <View style={styles.logoContainer}>
-            <Image
-                source={AppIcon.images.logo}
-                style={{
-                    width: 90,
-                    resizeMode: 'contain',
-                }}
-            />
-        </View>
-        <View style={styles.loginContainer}>
-                  <Image
-                      source={AppIcon.images.regisTypeUser}
-                      style={{
-                          width: 50,
-                          marginTop: 10,
-                          resizeMode: 'contain',
-                      }}
-                  />
-                  <View style={styles.typesContainer}>
-                  <TouchableOpacity
-                    onPress={() => this.setType("private")}
-                  >
-                      <Image
-                          source={this.state.type == "private" ? AppIcon.images.regisTypePrivateActive : AppIcon.images.regisTypePrivateInactive}
-                          style={{
-                              width: 90,
-                              marginHorizontal: 20,
-                              resizeMode: 'contain',
-                          }}
-                      />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => this.setType("business")}
-                  >
-                      <Image
-                        source={this.state.type == "business" ? AppIcon.images.regisTypeBusinessActive : AppIcon.images.regisTypeBusinessInactive}
-                        style={{
-                            width: 97,
-                            marginHorizontal: 20,
-                            resizeMode: 'contain',
-                        }}
-                    />
-                  </TouchableOpacity>
-                  </View>
-        </View>
-        <Image
-            source={AppIcon.images.regisTypeDots}
-            style={{
-                flex: 2,
-                width: 90,
-                resizeMode: 'contain',
-            }}
-        /> */}
-
-
+        <ModalSubscribe toggleModalHandler={this.toggleModal} isModalVisible={this.state.isModalVisible} setTypeHandler={this.setType}/>
       </View>
     );
   }
