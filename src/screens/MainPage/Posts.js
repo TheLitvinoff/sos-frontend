@@ -16,6 +16,9 @@ import EyeIcon from "../../../assets/icons/postEye.svg";
 import FavIcon from "../../../assets/icons/postFav.svg";
 import ShareIcon from "../../../assets/icons/postShare.svg";
 
+import ModalPostOptions from "./ModalPostOptions";
+import ModalPostShare from "./ModalPostShare";
+
 class PostsContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -39,7 +42,28 @@ class PostsContainer extends React.Component {
 class PostsItem extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            loading: true,
+            isOptionsModalVisible: false,
+            type: "",
+        };
     }
+
+    toggleOptionsModal = () => {
+        this.setState({
+            ...this.state,
+            isOptionsModalVisible: !this.state.isOptionsModalVisible
+        })
+    }
+
+
+    toggleShareModal = () => {
+        this.setState({
+            ...this.state,
+            isShareModalVisible: !this.state.isShareModalVisible
+        })
+    }
+
 
     render() {
         return (
@@ -49,7 +73,7 @@ class PostsItem extends React.Component {
                         <Image source={this.props.profilePicURL} style={styles.postsItemUserPhoto} />
                         <Text style={styles.postsItemUsername}>{this.props.username}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.postsOptionsContainer}>
+                    <TouchableOpacity style={styles.postsOptionsContainer} onPress={this.toggleOptionsModal}> 
                         <Image source={AppIcon.images.postOptions} style={styles.postsItemOptions} />
                     </TouchableOpacity>
                 </View>
@@ -68,12 +92,15 @@ class PostsItem extends React.Component {
                             </TouchableOpacity>
                         </View>
                         <View style={styles.shareContainer}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={this.toggleShareModal}>
                                 <ShareIcon />
                             </TouchableOpacity>
                         </View>
                     </View>
                 </View>
+
+                <ModalPostOptions toggleModalHandler={this.toggleOptionsModal} isModalVisible={this.state.isOptionsModalVisible} />
+                <ModalPostShare toggleModalHandler={this.toggleShareModal} isModalVisible={this.state.isShareModalVisible} />
             </View>
         );
     }
